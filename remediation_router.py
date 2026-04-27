@@ -567,3 +567,11 @@ async def get_status(task_id: str) -> TaskStatus:
         created_at=task["created_at"],
         updated_at=task["updated_at"],
     )
+
+@router.get("/health")
+async def health_check():
+    try:
+        # Lógica de salud minimalista
+        return {"status": "ok", "timestamp": _now()}
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error interno del servidor (RON3IA_Shield active)")
